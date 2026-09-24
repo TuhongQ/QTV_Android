@@ -52,7 +52,7 @@ public class MainActivity extends Activity {
     private boolean full=false,onlyFavorites=false,onlyRecent=false,onlyAvailable=false,prepared=false,paused=false,large=false,destroyed=false,inBackground=false;
     private int source=0,loadGeneration=0,playGeneration=0,testGeneration=0;
     private Runnable timeout,hideControls;
-    private final Runnable hide=()->{if(full&&prepared){controls.setVisibility(View.GONE);if(videoFullButton!=null)videoFullButton.setVisibility(View.GONE);}};
+    private final Runnable hide=()->{if(full){controls.setVisibility(View.GONE);if(videoFullButton!=null)videoFullButton.setVisibility(View.GONE);}};
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN|WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING); prefs=getSharedPreferences("mibox",MODE_PRIVATE);large=prefs.getBoolean("large",false);source=prefs.getInt("source",0);if(!prefs.getBoolean("sourceIndexV11",false)){if(prefs.contains("source"))source=Math.min(source+1,sourcePaths.length-1);prefs.edit().putBoolean("sourceIndexV11",true).putInt("source",source).apply();}
@@ -115,7 +115,9 @@ public class MainActivity extends Activity {
             LinearLayout.LayoutParams stp;
             if(isTouchDevice()){
                 int availH=m.heightPixels-dp(92);
-                stp=new LinearLayout.LayoutParams((int)(availH*16f/9f+0.5f),-1);
+                int ideal=(int)(availH*16f/9f+0.5f);
+                int cap=(int)(m.widthPixels*0.52f);   // 视频最宽占屏 52%，频道列表保底空间
+                stp=new LinearLayout.LayoutParams(Math.min(ideal,cap),-1);
                 stp.rightMargin=dp(8);
             }else{
                 stp=new LinearLayout.LayoutParams(0,-1,1.55f);
@@ -145,7 +147,7 @@ public class MainActivity extends Activity {
         full=value;hideKeyboard();fullButton.setText(full?"退出全屏":"全屏");
         if(full)applyImmersive();else getWindow().getDecorView().setSystemUiVisibility(0);arrange();showControls();
     }
-    private void showControls(){controls.setVisibility(View.VISIBLE);if(videoFullButton!=null)videoFullButton.setVisibility(View.VISIBLE);handler.removeCallbacks(hide);if(full&&prepared)handler.postDelayed(hide,5000);}
+    private void showControls(){controls.setVisibility(View.VISIBLE);if(videoFullButton!=null)videoFullButton.setVisibility(View.VISIBLE);handler.removeCallbacks(hide);if(full)handler.postDelayed(hide,5000);}
     private void hideKeyboard(){((InputMethodManager)getSystemService(INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(search.getWindowToken(),0);search.clearFocus();}
     private void chooseSource(){
         new AlertDialog.Builder(this).setTitle("选择频道分类").setSingleChoiceItems(sourceNames,source,(d,which)->{source=which;onlyFavorites=false;onlyRecent=false;search.setText("");prefs.edit().putInt("source",source).apply();sourceButton.setText(sourceNames[source]+" ▾");d.dismiss();loadSource(false);}).setNegativeButton("返回",null).show();
