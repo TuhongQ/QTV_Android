@@ -4,6 +4,8 @@ build/
 local.properties
 *.apk
 *.aab
+# 例外：releases/ 下作为存档的安装包
+!releases/*.apk
 
 # IDE
 .idea/
