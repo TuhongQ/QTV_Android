@@ -1,0 +1,7 @@
+apply plugin: 'com.android.application'
+
+android { namespace 'com.mibox.os'; compileSdk 35
+    signingConfigs { debug { enableV1Signing true; enableV2Signing true } }
+    defaultConfig { applicationId 'com.mibox.os'; minSdk 23; targetSdk 35; versionCode 18; versionName '1.2.0-qtv' }
+    buildTypes { debug { signingConfig signingConfigs.debug } }
+}

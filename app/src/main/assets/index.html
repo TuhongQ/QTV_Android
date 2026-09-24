@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiBox OS · TV Prototype</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient"></div>
+  <main class="shell" aria-label="MiBox OS 电视盒子模拟器">
+    <header class="topbar">
+      <div class="brand"><span class="brand-mark">M</span><span>MiBox <b>OS</b></span></div>
+      <div class="top-status"><span class="status-dot"></span><span>客厅 Wi‑Fi</span><span class="divider"></span><span id="clock">20:48</span><button class="icon-button" data-route="settings" aria-label="打开设置">⚙</button></div>
+    </header>
+
+    <section id="home" class="view active" data-view="home">
+      <div class="hero">
+        <div class="hero-copy"><p class="eyebrow">继续观看 · 进度 62%</p><h1>流浪地球 2</h1><p class="hero-meta">2023 · 科幻 · 2小时53分钟</p><p class="hero-desc">太阳即将毁灭，人类带着地球一起逃离太阳系。</p><div class="hero-actions"><button class="primary focusable" data-action="play">▶ 继续播放</button><button class="ghost focusable" data-action="info">详情</button></div></div>
+        <div class="hero-art"><div class="planet"></div><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="hero-glow"></div><span class="art-label">THE<br><strong>WANDERING<br>EARTH</strong></span></div>
+      </div>
+
+      <div class="section-heading"><h2>应用</h2><span>按 Enter 打开</span></div>
+      <div class="app-row" id="appRow">
+        <button class="app-card focusable selected" data-route="media" data-name="影视"><span class="app-icon cinema">▶</span><span>影视</span><small>精选内容</small></button>
+        <button class="app-card focusable" data-action="launch" data-name="Kodi"><span class="app-icon kodi">K</span><span>Kodi</span><small>本地媒体中心</small></button>
+        <button class="app-card focusable" data-action="launch" data-name="Emby"><span class="app-icon emby">e</span><span>Emby</span><small>家庭影音库</small></button>
+        <button class="app-card focusable" data-route="files" data-name="NAS 文件"><span class="app-icon nas">⌁</span><span>NAS 文件</span><small>局域网存储</small></button>
+        <button class="app-card focusable" data-action="launch" data-name="YouTube"><span class="app-icon youtube">▶</span><span>YouTube</span><small>视频与频道</small></button>
+        <button class="app-card focusable" data-route="apps" data-name="应用中心"><span class="app-icon store">✣</span><span>应用中心</span><small>管理 TV 应用</small></button>
+        <button class="app-card focusable" data-route="settings" data-name="设置"><span class="app-icon settings">⚙</span><span>设置</span><small>系统偏好</small></button>
+        <button class="app-card focusable" data-route="tv" data-name="网络电视"><span class="app-icon live">●</span><span>网络电视</span><small>公开直播频道</small></button>
+      </div>
+      <div class="continue-row"><div class="mini-poster poster-one"><span>黑暗荣耀</span></div><div class="mini-poster poster-two"><span>Oppenheimer</span></div><div class="mini-poster poster-three"><span>三体</span></div><div class="mini-poster poster-four"><span>沙丘 2</span></div><div class="continue-copy"><p class="eyebrow">为你推荐</p><h3>今晚看点新鲜的</h3><p>基于你的播放记录精选</p></div></div>
+    </section>
+
+    <section id="tv" class="view" data-view="tv"><div class="page-title"><p class="eyebrow">Live TV · 网络电视</p><h1>直播频道</h1><p>点击频道即可播放；支持触屏点击和键盘遥控</p></div><div class="tv-layout"><div class="player-card"><video id="player" controls playsinline preload="none"></video><div class="player-empty" id="playerEmpty"><span>●</span><strong>选择一个频道开始播放</strong><small>部分公开直播可能受地区、时间或源站状态影响</small></div><div class="now-playing" id="nowPlaying">尚未选择频道</div></div><div class="channel-panel"><div class="channel-head"><h3>频道列表</h3><span class="source-badge">iptv-org · 公开清单</span></div><div id="channelList" class="channel-list"></div><a class="source-link" href="https://iptv-org.github.io/iptv/languages/zho.m3u" target="_blank">查看完整中文频道清单 ↗</a></div></div></section>
+
+    <section id="media" class="view" data-view="media"><div class="page-title"><p class="eyebrow">影音中心</p><h1>影视</h1><p>选择一个内容源开始播放</p></div><div class="media-grid"><button class="media-tile focusable"><span>▶</span><strong>继续观看</strong><small>从上次进度继续</small></button><button class="media-tile focusable"><span>✦</span><strong>热门推荐</strong><small>本周大家都在看</small></button><button class="media-tile focusable"><span>⌁</span><strong>我的媒体库</strong><small>Emby · Jellyfin</small></button><button class="media-tile focusable"><span>▣</span><strong>本地视频</strong><small>手机存储与 U 盘</small></button></div></section>
+
+    <section id="files" class="view" data-view="files"><div class="page-title"><p class="eyebrow">文件浏览</p><h1>NAS 文件</h1><p>局域网媒体与共享文件</p></div><div class="file-panel"><div class="server-row"><span class="server-icon">⌁</span><div><strong>家庭 NAS</strong><small>192.168.1.88 · 已连接</small></div><span class="connected">已连接</span></div><div class="file-row focusable"><span>▣</span><strong>电影</strong><small>128 个文件</small><span>›</span></div><div class="file-row focusable"><span>♫</span><strong>音乐</strong><small>2,408 首歌曲</small><span>›</span></div><div class="file-row focusable"><span>▤</span><strong>照片</strong><small>2026 个文件</small><span>›</span></div></div></section>
+
+    <section id="apps" class="view" data-view="apps"><div class="page-title"><p class="eyebrow">应用管理</p><h1>应用中心</h1><p>为大屏优化的应用都在这里</p></div><div class="store-layout"><div class="store-feature"><span class="feature-icon">✣</span><h2>发现适合电视的应用</h2><p>精选 Android TV 应用，一键安装与更新。</p><button class="primary focusable">浏览应用</button></div><div class="installed"><h3>已安装</h3><div class="installed-item focusable"><span class="app-icon kodi">K</span><div><strong>Kodi</strong><small>版本 21.1 · 已更新</small></div><span>打开</span></div><div class="installed-item focusable"><span class="app-icon emby">e</span><div><strong>Emby</strong><small>版本 4.8 · 已更新</small></div><span>打开</span></div></div></div></section>
+
+    <section id="settings" class="view" data-view="settings"><div class="page-title"><p class="eyebrow">系统偏好</p><h1>设置</h1><p>让客厅体验更顺手</p></div><div class="settings-layout"><nav class="settings-nav"><button class="setting-tab focusable active"><span>⌁</span>网络与 Wi‑Fi</button><button class="setting-tab focusable"><span>◉</span>蓝牙与遥控器</button><button class="setting-tab focusable"><span>▣</span>显示</button><button class="setting-tab focusable"><span>♪</span>声音</button><button class="setting-tab focusable"><span>▦</span>应用管理</button></nav><div class="settings-detail"><div class="setting-detail-head"><span class="large-setting-icon">⌁</span><div><h2>网络与 Wi‑Fi</h2><p>已连接到客厅 Wi‑Fi</p></div><span class="connected">已连接</span></div><div class="option-row focusable"><div><strong>客厅 Wi‑Fi</strong><small>信号强度：优秀 · 5 GHz</small></div><span class="toggle on"></span></div><div class="option-row focusable"><div><strong>自动连接</strong><small>检测到熟悉网络时自动连接</small></div><span class="toggle on"></span></div><div class="option-row focusable"><div><strong>网络诊断</strong><small>测试当前网络状态</small></div><span>›</span></div></div></div></section>
+
+    <footer class="footer-hint"><span class="key">←</span><span class="key">↑</span><span class="key">↓</span><span class="key">→</span> 导航 <span class="key enter">↵</span> 选择 <span class="key">Esc</span> 返回</footer>
+    <div id="toast" class="toast" role="status"></div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

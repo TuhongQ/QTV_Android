@@ -1,0 +1,18 @@
+pluginManagement { repositories { maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }; maven { url 'https://maven.aliyun.com/repository/google' }; maven { url 'https://maven.aliyun.com/repository/public' }; google(); mavenCentral(); gradlePluginPortal() } }
+dependencyResolutionManagement { repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS); repositories { maven { url 'https://maven.aliyun.com/repository/google' }; maven { url 'https://maven.aliyun.com/repository/public' }; google(); mavenCentral() } }
+rootProject.name='QTV'
+include ':app'
+
+// SDK 自动探测：没有 local.properties 且未设置 ANDROID_HOME/ANDROID_SDK_ROOT 时，
+// 尝试 Windows/macOS/Linux 常见默认安装位置，命中则写入 local.properties（已被 gitignore 排除）。
+if (!file("local.properties").exists() && System.getenv("ANDROID_HOME") == null && System.getenv("ANDROID_SDK_ROOT") == null) {
+    def candidates = [
+        new File(System.getProperty("user.home"), "AppData/Local/Android/Sdk"),
+        new File(System.getProperty("user.home"), "Library/Android/sdk"),
+        new File(System.getProperty("user.home"), "Android/Sdk")
+    ]
+    def sdk = candidates.find { new File(it, "platforms").isDirectory() }
+    if (sdk != null) {
+        file("local.properties").text = "sdk.dir=${sdk.absolutePath.replace('\\', '/')}\n"
+    }
+}
